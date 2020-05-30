@@ -2,7 +2,7 @@
 
 ## Labs
 
-- Lab01 - Create a Classic Pipeline with Jenkins (Ephemeral) on OpenShift 3
+- Lab01 - Create a Classic Pipeline with Jenkins (Ephemeral) on OpenShift 3, see [Lab01](lab-01/README.md)
 - Lab02 - Create an OpenShift Pipeline with Pipeline Strategy on OpenShift 3
 
 
