@@ -3,7 +3,7 @@
 ## Labs
 
 - Lab01 - Create a Classic Pipeline with Jenkins (Ephemeral) on OpenShift 3, see [Lab01](lab-01/README.md)
-- Lab02 - Create an OpenShift Pipeline with Pipeline Strategy on OpenShift 3
+- Lab02 - Create an OpenShift Pipeline with Jenkins Pipeline Build Strategy on OpenShift 3, see [Lab02](lab-02/README.md)
 
 
 ## OpenShift
@@ -25,5 +25,3 @@ The `Build` strategies in OCP 4.3 are:
 - Pipeline build strategy can be used to implement sophisticated workflows for Continuous integration and Continuous deployment. Pipeline build strategy allows developers to define a Jenkins pipeline in a Jenkinsfile. However, it is deprecated on OCP 4 and is replaced with OpenShift Pipelines based on Tekton. 
 
 With an `ImageStream`, you can trigger Builds and Deployments when a new image is pushed to the registry. You can configure Builds and Deployments to watch an image stream for notifications when new images are added and react by performing a Build or Deployment, respectively.
-
-

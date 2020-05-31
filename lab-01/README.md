@@ -1,4 +1,4 @@
-# Classic Pipeline with Jenkins (Ephemeral) on OpenShift 3
+# Lab01 - Create a Classic Pipeline with Jenkins (Ephemeral) on OpenShift 3
 
 ## Requirements
 
