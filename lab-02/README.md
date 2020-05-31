@@ -8,30 +8,30 @@ The OpenShift Jenkins Client Plug-in must be installed on your Jenkins master. T
 
 This lab creates an OpenShift Pipeline that will build, deploy, and verify a Node.js/MongoDB application using the nodejs-mongodb.json template.
 
-1. Create a BuildConfig,
-1. Create a file named `nodejs-sample-pipeline.yaml`,
+## Clean up Existing Deployment
 
-    ```
-    $ echo 'kind: "BuildConfig"
-    apiVersion: "v1"
-    metadata:
-    name: "nodejs-sample-pipeline"
-    spec:
-    strategy:
-        jenkinsPipelineStrategy:
-        jenkinsfile: <pipeline content from below>
-        type: JenkinsPipeline' > nodejs-sample-pipeline.yaml
-    ```
-
+1.Delete the existing project,
 ```
 $ PROJECT=springclient-ns
 $ oc delete project $PROJECT
+project.project.openshift.io "springclient-ns" deleted
+```
+
+1. Delete the existing BuildConfig,
+```
 $ oc delete buildconfig spring-client-pipeline
 buildconfig.build.openshift.io "spring-client-pipeline" deleted
+```
 
-project.project.openshift.io "springclient-ns" deleted
+## Deploy the Spring Client
+
+1. Create the project,
+```
 $ oc new-project $PROJECT
+```
 
+1. Create the BuildConfig declaration file,
+```
 $ echo 'kind: "BuildConfig"
 apiVersion: "v1"
 metadata:
@@ -52,14 +52,16 @@ spec:
           value: "31608"
         - name: "PROJECT"
           value: "springclient-ns"' > spring-client-pipeline.yaml 
+```
 
+1. Create the BuildConfig and the OpenShift Pipeline,
+```
 $ oc create -f spring-client-pipeline.yaml
 buildconfig.build.openshift.io/spring-client-pipeline created
+```
+
+1. Start the pipeline,
+```
 $ oc start-build spring-client-pipeline
 build.build.openshift.io/spring-client-pipeline-1 started
-
-
-
-
-
-
+```
