@@ -1,9 +1,12 @@
 # Jenkins 101
 
+Self: http://ibm.biz/jenkins101
+
 ## Labs
 
-- Lab01 - Create a Classic Pipeline with Jenkins (Ephemeral) on OpenShift 3, see [Lab01](lab-01/README.md)
-- Lab02 - Create an OpenShift Pipeline with Jenkins Pipeline Build Strategy on OpenShift 3, see [Lab02](lab-02/README.md)
+- [Lab00](lab-00/README.md) - Setup
+- [Lab01](lab-01/README.md) - Create a Classic Pipeline with Jenkins (Ephemeral) on OpenShift 3
+- [Lab02](lab-02/README.md) - Create an OpenShift Pipeline with Jenkins Pipeline Build Strategy on OpenShift 3
 
 
 ## OpenShift
