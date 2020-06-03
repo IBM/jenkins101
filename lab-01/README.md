@@ -10,10 +10,13 @@
 - Github personal access token
 
 
+## Setup
+
+Go to [Lab01 - Setup](../lab-00/README.md) to get an IBM Id, access to a cluster and a cloud shell.
+
 ## Setup Jenkins (Ephemeral) on OpenShift 3
 
 Go to [Setup Jenkins on OpenShift 3](SETUP.md) to complete the Jenkins setup and configuration on OpenShift 3.
-
 
 ## Fork the `spring-client` App in Github
 
@@ -23,8 +26,27 @@ To create a fork of the spring-client repository:
 1. Cick the `Fork` button in the to right to create a fork in your own GitHub organization, e.g. `https://github.com/<username>/spring-client`
 1. Review the Jenkinsfile that is included in the Spring Client repository,
 1. Edit the Jenkinsfile,
-1. In the Login stage, Change the URL and the port to match your login command,
+1. Copy the login command to your OpenShift cluster,
 
+    ![OpenShift Copy Login Command](../images/copy-login-command.png)
+
+    ```
+    $ oc login https://c100-e.us-south.containers.cloud.ibm.com:30645 --token=CgwpwTu12sJV3u45iFFWd-6V7JsD8b90JBoJk1zGR2I
+    ```
+
+    1. In the `environment` section of the `Jenkinsfile`, change the `LOGIN_URL` and the `LOGIN_PORT` to match
+    ```
+    pipeline {
+    agent {
+        label 'maven'
+    }
+    environment {
+        LOGIN_URL = 'https://c100-e.us-south.containers.cloud.ibm.com'
+        LOGIN_PORT = '30645'
+    }  
+    ```
+
+1. Commit changes to the `Jenkinsfile` to your Github fork. The Jenkins pipeline will use your `Jenkinsfile` to dpeloy your forked `spring-client` to your own OpenShift cluster.
 
 ## Create a Github Personal Access Token
 
@@ -39,8 +61,8 @@ To create a fork of the spring-client repository:
 
 ## Configure Jenkins Access to OpenShift
 
-1. Go to the OpenShift web console,
-1. From the logged in user profile dropdown, click the Copy Login Command. The command should look like,
+1. Go to the OpenShift web console again or use the `Copy Login Command` from earlier again,
+1. From the logged in user profile dropdown, click the `Copy Login Command`. The command should look like,
 
     ```
     oc login https://<your-openshift-url>:<your-openshift-port> --token=<your-openshift-api-token>
@@ -54,7 +76,6 @@ To create a fork of the spring-client repository:
 
     ![OpenShift Jenkins credentials](../images/jenkins-credentials.png)
 
-1. The Jenkinsfile expects an OpenShift API token credential to be available named `openshift-login-api-token`,
 1. Go to Credentials > System,
 
     ![OpenShift Jenkins credentials](../images/jenkins-credentials.png)
@@ -64,15 +85,19 @@ To create a fork of the spring-client repository:
     ![OpenShift Jenkins credentials](../images/jenkins-credentials-system-add.png)
 
 1. From the drowdown, click `Add credentials`,
+2. The Jenkinsfile expects an OpenShift API token credential to be available named `openshift-login-api-token`,
 1. For Kind select `Username with password`,
+1. For Scope select `Global`,
 1. For Username enter `token`,
 1. For Password paste the OpenShift API token from the OpenShift web console login command,
 1. For ID enter `openshift-login-api-token`, which is the ID that the Jenkinsfile will look for,
 1. For Description enter `openshift-login-api-token`,
-1. Click Save,
 
-    ![OpenShift Jenkins credentials](../images/jenkins-new-credentials.png)
+    ![Jenkins credentials](../images/jenkins-new-credentials.png)
 
+2. Click OK,
+
+    ![Jenkins new credentials](../images/jenkins-new-credential.png)
 
 ## Create a Jenkins Pipeline
 
@@ -81,6 +106,9 @@ To create a fork of the spring-client repository:
 1. Go to Administration > Projects,
 1. Filter projects by `springclient-ns`,
 1. If there is no such project, click `Create Project` to create it,
+
+    ![OpenShift Jenkins credentials](../images/jenkins-new-project.png)
+
 1. The Jenkinsfile of the spring-client application defines a stage to delete and create the `springclient-ns` project. The delete step causes an error when the project it tries to delete is missing,
 1. Make sure a project `springclient-ns` exists in OpenShift,
 1. if no `springclient-ns` project exists, create it from the cloud shell, 
@@ -89,6 +117,7 @@ To create a fork of the spring-client repository:
     $ oc new-project springclient-ns
     ```
 
+1. Go back to the Jenkins dashboard. If you closed Jenkins,
 1. Go to the `Application Console`, and go to the project `jenkins`,
 1. Click the Route for External Traffic to open the Jenkins instance,
 1. Click `Log in with OpenShift`,
@@ -140,6 +169,12 @@ To create a fork of the spring-client repository:
     1. Review the settings,
 1. From the cloud shell, make sure you're logged in to the OpenShift console,
 1. Use the project `oc project springclient-ns`,
+
+    ```
+    $ oc project springclient-ns
+    Now using project "springclient-ns" on server "https://c100-e.us-south.containers.cloud.ibm.com:30645".
+    ```
+
 1. Get the route and test the deployment, 
 
     ```
@@ -147,3 +182,5 @@ To create a fork of the spring-client repository:
     $ curl -X GET http://$ROUTE/api/hello?name=you
     { "message" : "Hello you" }
     ```
+
+Go to [Lab02](../lab-02/README.md).

@@ -28,26 +28,25 @@
 
     ![OpenShift create Jenkins service](../images/jenkins-1.png)
 
-1. Click Next,
-1. For Add to Project select `jenkins`,
-
-    ![OpenShift Add to Project](../images/jenkins-2.png)
-
-1. Click Next,
-1. Check the option `Do not bind at this time`,
-
-    ![OpenShift Do not bind](../images/jenkins-3.png)
-
+1. For `Add to Project` select `jenkins`,
 1. Click Create,
+1. If a popup `Confirm Creation` appears, click `Create Anyway`,
 
-    ![OpenShift Jenkins Create](../images/jenkins-4.png)
+    ![OpenShift create Jenkins service - Create Anyway](../images/jenkins-2.png)
 
 1. Click Close while Jenkins is being provisioned in `jenkins`,
+
+    ![OpenShift Jenkins Create](../images/jenkins-3.png)
+
 1. Select the `Application Console`, and go to your project `jenkins`,
-1. Go to Overview, and wait until Jenkins has been provisioned,
+1. Go to Overview, and wait until Jenkins has been provisioned, the pod should color bright blue,
+
+    ![OpenShift Jenkins Provisioning](../images/jenkins-4.png)
+    ![OpenShift Jenkins Provisioned](../images/jenkins-5.png)
+
 1. If provisioning fails the first time because of a timeout during pulling of images, simply deploy the service again,
 1. To see the log for a deployment #1, go to Applications > Deployments > Jenkins > #1,
-1. Click the Logs tab,
+1.  Click the Logs tab,
 
     ![OpenShift Jenkins Running](../images/jenkins-running.png)
 
@@ -57,7 +56,7 @@
 
 1. Open Jenkins in a new tab by clicking the Jenkins route URL in the `Overview`, e.g. https://jenkins-ci1.cda-openshift-cluster-1c0e8bfb1c68214cf875a9ca7dd1e060-0001.us-south.containers.appdomain.cloud,
 
-1. Click Log in with OpenShift,
+1.  Click `Log in with` OpenShift,
 
     ![OpenShift Jenkins Login with OpenShift](../images/jenkins-login-with-openshift.png)
 
@@ -66,12 +65,17 @@
     ![OpenShift Jenkins Allow selected permissions](../images/jenkins-login-set-permissions.png)
 
 1. Jenkins web will open,
+
+    ![OpenShift Jenkins Dashboard](../images/jenkins-dashboard.png)
+
 1. Configure Jenkins
     1. Go to Jenkins > Manage Jenkins > Global Tool Configuration,
-    1. Go to the `Maven` section, 
-    1. Click `Maven Installations`,
-    1. If no Maven installer is configured, click `Add Maven`,
-    1. Configure the `Name` to be `maven`, check the option `Install automatically` and select version `3.6.3`,
-    1. Click Save,
+    2. Go to the `Maven` section, 
+    3. Click `Maven Installations`,
+    4. If no Maven installer is configured, click `Add Maven`,
+    5. Configure the `Name` to be `maven`, check the option `Install automatically` and select version `3.6.3`,
+    6. Click Save,
 
     ![OpenShift Add Maven](../images/jenkins-add-maven.png)
+
+1. Go back to [Lab01](../README.) to continue the Jenkins setup.
