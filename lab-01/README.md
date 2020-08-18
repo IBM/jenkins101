@@ -1,11 +1,11 @@
-# Lab01 - Create a Classic Pipeline with Jenkins (Ephemeral) on OpenShift 3
+# Create a Classic Pipeline with Jenkins on OpenShift 4.3
 
 ## Requirements
 
 - An IBM Cloud account
-- An OpenShift 3 cluster with a minimum of 3 worker nodes
-- Access to an IBM Cloud shell at https://shell.cloud.ibm.com
-- A Jenkins instance on OpenShift 3
+- An OpenShift 4.3 cluster with a minimum of 3 worker nodes
+- Access to a terminal with the `oc` cli and `ibmcloud` cli, either using [Skills Network](https://labs.cognitiveclass.ai) or [IBM Cloud shell](https://shell.cloud.ibm.com).
+- A Jenkins instance on OpenShift 4.3, see setup below,
 - A Github fork of https://github.com/remkohdev/spring-client,
 - Github personal access token
 
