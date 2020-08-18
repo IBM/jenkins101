@@ -201,5 +201,3 @@ To create a fork of the spring-client repository:
     curl -X GET http://$ROUTE/api/hello?name=you
     { "message" : "Hello you" }
     ```
-
-Go to [Lab02](../lab-02/README.md).
