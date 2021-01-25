@@ -2,9 +2,17 @@
 
 Self: http://ibm.biz/jenkins101
 
+## Prerequirements
+
+For this lab you need the following setup:
+
+1. An IBM Cloud account, for instructions go [here](https://ibm.github.io/workshop-setup/NEWACCOUNT/).
+2. Access to an OpenShift cluster, for an IBM managed workshop you can add an existing OpenShift cluster to your IBMId, for instructions go [here](https://ibm.github.io/workshop-setup/GRANTCLUSTER/).
+3. A client terminal at CognitiveClass.ai, for instructions go [here](https://ibm.github.io/workshop-setup/COGNITIVECLASS/).
+4. To connect to a RedHat OpenShift Kubernetes Service (ROKS), follow the instructions [here](https://ibm.github.io/workshop-setup/ROKS/).
+
 ## Labs
 
-- [Lab00](lab-00/README.md) - Setup
 - [Lab01](lab-01/README.md) - Create a Classic Pipeline with Jenkins (Ephemeral) on OpenShift 3
 - [Lab02](lab-02/README.md) - Create an OpenShift Pipeline with Jenkins Pipeline Build Strategy on OpenShift 3
 
