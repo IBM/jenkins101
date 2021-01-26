@@ -32,14 +32,17 @@ To create a fork of the spring-client repository:
     1. In the `environment` section of the `Jenkinsfile`, change the `LOGIN_URL` and the `LOGIN_PORT` to match
     ```
     pipeline {
-    agent {
-        label 'maven'
+    agent any
+    tools { 
+      maven 'maven'
     }
     environment {
         LOGIN_URL = 'https://c100-e.us-south.containers.cloud.ibm.com'
         LOGIN_PORT = '30645'
     }  
     ```
+
+    **Note:** it is not proper to leave configuration details in your repository, let alone on public Github, but for simplicity I defined the URL and NodePort here.
 
 1. Commit changes to the `Jenkinsfile` to your Github fork. The Jenkins pipeline will use your `Jenkinsfile` to deploy your forked `spring-client` to your own OpenShift cluster.
 
