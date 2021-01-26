@@ -1,17 +1,17 @@
-# Create a Classic Pipeline with Jenkins on OpenShift 4.3
+# Create a Classic Pipeline with Jenkins on OpenShift 4.5
 
 ## Requirements
 
 - An IBM Cloud account
-- An OpenShift 4.3 cluster with a minimum of 3 worker nodes
-- Access to a terminal with the `oc` cli and `ibmcloud` cli, either using [Skills Network](https://labs.cognitiveclass.ai) or [IBM Cloud shell](https://shell.cloud.ibm.com).
-- A Jenkins instance on OpenShift 4.3, see setup below,
+- An OpenShift 4.x cluster with a minimum of 2 worker nodes
+- Access to a terminal with the `oc` cli and `ibmcloud` cli, use [Skills Network](https://labs.cognitiveclass.ai) or [IBM Cloud shell](https://shell.cloud.ibm.com). For instructions go [here](https://ibm.github.io/workshop-setup/COGNITIVECLASS/).
+- A Jenkins instance on OpenShift 4.x, see setup below,
 - A Github fork of https://github.com/remkohdev/spring-client,
 - Github personal access token
 
-## Setup Jenkins on OpenShift 4.3
+## Setup Jenkins on OpenShift 4.x
 
-Go to [Setup Jenkins on OpenShift 4.3](https://github.com/remkohdev/workshop-setup/blob/master/workshop/jenkins/SETUP_OCP43.md) to complete the Jenkins setup and configuration on OpenShift 4.3 using the Jenkins Operator.
+Go to [Setup Jenkins on OpenShift 4.x](https://ibm.github.io/workshop-setup/JENKINS/) to complete the Jenkins setup and configuration on OpenShift 4.x using the Jenkins Operator.
 
 ## Fork the `spring-client` App in Github
 
@@ -41,7 +41,7 @@ To create a fork of the spring-client repository:
     }  
     ```
 
-1. Commit changes to the `Jenkinsfile` to your Github fork. The Jenkins pipeline will use your `Jenkinsfile` to dpeloy your forked `spring-client` to your own OpenShift cluster.
+1. Commit changes to the `Jenkinsfile` to your Github fork. The Jenkins pipeline will use your `Jenkinsfile` to deploy your forked `spring-client` to your own OpenShift cluster.
 
 ## Create a Github Personal Access Token
 

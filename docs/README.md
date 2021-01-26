@@ -13,8 +13,8 @@ For this lab you need the following setup:
 
 ## Labs
 
-- [Lab01](lab-01/README.md) - Create a Classic Pipeline with Jenkins (Ephemeral) on OpenShift 4.5
-- [Lab02](lab-02/README.md) - Create an OpenShift Pipeline with Jenkins Pipeline Build Strategy on OpenShift 4.5
+- [Lab01](lab-01/README.md) - Create a Classic Pipeline with Jenkins (Ephemeral) on OpenShift 3
+- [Lab02](lab-02/README.md) - Create an OpenShift Pipeline with Jenkins Pipeline Build Strategy on OpenShift 3
 
 ## OpenShift
 
