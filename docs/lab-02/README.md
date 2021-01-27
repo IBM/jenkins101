@@ -1,6 +1,6 @@
-# Using a Pipeline Build Strategy on OpenShift 4.3
+# Using a Pipeline Build Strategy on OpenShift 4.x
 
-With the release of OpenShift Pipelines based on Tekton, the pipelines build strategy has been deprecated. Users should either use Jenkins files directly on Jenkins or use cloud-native CI/CD with Openshift Pipelines.
+With the release of OpenShift Pipelines based on Tekton, the pipelines build strategy has been deprecated on OpenShift 4.x. Users should either use Jenkins files directly on Jenkins or use cloud-native CI/CD with Openshift Pipelines.
 
 OpenShift Pipelines give you control over building, deploying, and promoting your applications on OpenShift. Using a combination of the Jenkins Pipeline Build Strategy, Jenkinsfiles, and the OpenShift Domain Specific Language (DSL) (provided by the OpenShift Jenkins Client Plug-in), you can create advanced build, test, deploy, and promote pipelines for any scenario. 
 
@@ -34,43 +34,44 @@ This lab creates an OpenShift Pipeline to build the `springclient` application i
 1. From the cloud shell,
 1. Create the project anew,
 
-    ```
+    ```console
     oc new-project springclient-ns
     ```
 
 1. Create the BuildConfig declaration file using a Jenkins pipeline strategy, use your own forked repo instead of the one listed in the `spec.source.git.uri` attribute here, and set the `spec.strategy.jenkinsPipelineStrategy.env` environment vairables to match your cluster's LOGIN_URL and LOGIN_PORT found via the `Copy Login Command`,
 
+    ```console
+    echo 'kind: "BuildConfig"
+    apiVersion: "v1"
+    metadata:
+      name: "spring-client-pipeline"
+      namespace: springclient-ns
+    spec:
+      source:
+        git:
+          uri: "https://github.com/remkohdev/spring-client"
+          ref: "master"
+      strategy:
+        jenkinsPipelineStrategy:
+          jenkinsfilePath: Jenkinsfile-oc
+          env:
+          - name: "LOGIN_URL"
+            value: "https://c103-e.us-south.containers.cloud.ibm.com"
+          - name: "LOGIN_PORT"
+            value: "32110"
+          - name: "PROJECT"
+            value: "springclient-ns"' > spring-client-pipeline.yaml 
     ```
-echo 'kind: "BuildConfig"
-apiVersion: "v1"metadata:
-  name: "spring-client-pipeline"
-  namespace: springclient-ns
-spec:
-  source:
-    git:
-      uri: "https://github.com/remkohdev/spring-client"
-      ref: "master"
-  strategy:
-    jenkinsPipelineStrategy:
-      jenkinsfilePath: Jenkinsfile-oc
-      env:
-        - name: "LOGIN_URL"
-          value: "https://c103-e.us-south.containers.cloud.ibm.com"
-        - name: "LOGIN_PORT"
-          value: "32110"
-        - name: "PROJECT"
-          value: "springclient-ns"' > spring-client-pipeline.yaml 
-    ```
 
-1. A BuildConfig or build configuration describes a build definition and triggers for when a new build should be created. The Pipeline build strategy allows you to define a Jenkins pipeline for execution by the `Jenkins pipeline plugin`. 
+2. A BuildConfig or build configuration describes a build definition and triggers for when a new build should be created. The Pipeline build strategy allows you to define a Jenkins pipeline for execution by the `Jenkins pipeline plugin`. 
 
-2. The first time a user defines a build configuration in a project using a Pipeline strategy, OpenShift Container Platform instantiates a Jenkins server to execute the pipeline. 
+3. The first time a user defines a build configuration in a project using a Pipeline strategy, OpenShift Container Platform instantiates a Jenkins server to execute the pipeline. 
 
-3. To be sure, close any tabs open to the Jenkins instance. 
+4. To be sure, close any tabs open to the Jenkins instance. 
 
-4. Review the Jenkinsfile called `Jenkinsfile-oc` for the OpenShift Pipeline at https://github.com/remkohdev/spring-client/Jenkinsfile-oc. The pipeline is using the [Maven DSL](https://jenkinsci.github.io/job-dsl-plugin/#path/freeStyleJob-steps-maven) (Domain Specific Language) and the OpenShift DSL.
+5. Review the Jenkinsfile called `Jenkinsfile-oc` for the OpenShift Pipeline at https://github.com/remkohdev/spring-client/Jenkinsfile-oc. The pipeline is using the [Maven DSL](https://jenkinsci.github.io/job-dsl-plugin/#path/freeStyleJob-steps-maven) (Domain Specific Language) and the OpenShift DSL.
 
-5. Create a Jenkins master,
+6. Create a Jenkins master,
 
     ```
     oc new-app jenkins-ephemeral
@@ -112,24 +113,32 @@ spec:
         Run 'oc status' to view your app.
     ```
 
-5. Create the BuildConfig and the OpenShift Pipeline,
+7. Go to your OpenShift console, go to Workloads > Pods and in the project `springclient-ns`, view the status of your Jenkins instance,
 
-    ```
+    ![Jenkins Ephemeral](../images/oc-create-jenkins-ephemeral.png)
+
+8. From the console output or the OpenShift console > Networking > Routes, get the route to access the Jenkins instance, open the link to your Jenkins instance in a new tab,
+9. Log in with OpenShift,
+10. Authorize access and click `Allow selected permissions`,
+11. Welcome to Jenkins!
+12. Create the BuildConfig and the OpenShift Pipeline,
+
+    ```console
     oc create -f spring-client-pipeline.yaml
     ```
 
     outputs,
 
-    ```
+    ```consol
     $ oc create -f spring-client-pipeline.yaml
     buildconfig.build.openshift.io/spring-client-pipeline created
     ```
 
-6.  Go to `Builds` > `Build Configs`,
+13. Go to `Builds` > `Build Configs`,
 
     ![](../images/build-configs.png)
 
-7.  Start a build of the pipeline,
+14. Start a build of the pipeline,
 
     ```
     $ oc start-build spring-client-pipeline
@@ -138,13 +147,13 @@ spec:
 
     ![](../images/builds.png)
 
-8.  Go to `Builds` > `Builds`. Open the `springclient-ns` project. Once the Jenkins instance is created, the Jenkins instance will start the pipeline to create the `springclient` application.
+15. Go to `Builds` > `Builds`. Select the `springclient-ns` project from the `Project` dropdown. Once the Jenkins instance is created, the Jenkins instance will start the pipeline to create the `springclient` application.
 
-9.  A pipeline build was started,
+16. A pipeline build was started,
 
     ![OpenShift Jenkins pipeline started](../images/jenkins-pipeline-started.png)
 
-10. The `View logs` will open the Jenkins instance,
+17. The `View logs` will open the Jenkins instance,
 
 
 ## Resources
