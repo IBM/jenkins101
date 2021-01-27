@@ -2,12 +2,12 @@
 
 ## Requirements
 
-- An IBM Cloud account
-- An OpenShift 4.x cluster with a minimum of 2 worker nodes
-- Access to a terminal with the `oc` cli and `ibmcloud` cli, use [Skills Network](https://labs.cognitiveclass.ai) or [IBM Cloud shell](https://shell.cloud.ibm.com). For instructions go [here](https://ibm.github.io/workshop-setup/COGNITIVECLASS/).
-- A Jenkins instance on OpenShift 4.x, see setup below,
-- A Github fork of https://github.com/remkohdev/spring-client,
-- Github personal access token
+* An IBM Cloud account
+* An OpenShift 4.x cluster with a minimum of 2 worker nodes
+* Access to a terminal with the `oc` cli and `ibmcloud` cli, use [Skills Network](https://labs.cognitiveclass.ai) or [IBM Cloud shell](https://shell.cloud.ibm.com). For instructions go [here](https://ibm.github.io/workshop-setup/COGNITIVECLASS/).
+* A Jenkins instance on OpenShift 4.x, see setup below,
+* A Github fork of [https://github.com/remkohdev/spring-client](https://github.com/remkohdev/spring-client),
+* Github personal access token
 
 ## Setup Jenkins on OpenShift 4.x
 
@@ -17,7 +17,7 @@ Go to [Setup Jenkins on OpenShift 4.x](https://ibm.github.io/workshop-setup/JENK
 
 To create a fork of the spring-client repository:
 
-1. Go to https://github.com/remkohdev/spring-client,
+1. Go to [https://github.com/remkohdev/spring-client](https://github.com/remkohdev/spring-client),
 1. Cick the `Fork` button in the to right to create a fork in your own GitHub organization, e.g. `https://github.com/<username>/spring-client`
 1. Review the Jenkinsfile that is included in the Spring Client repository,
 1. Edit the Jenkinsfile,
@@ -26,7 +26,7 @@ To create a fork of the spring-client repository:
     ![OpenShift Copy Login Command](../images/copy-login-command.png)
 
     ```console
-    $ oc login https://c100-e.us-south.containers.cloud.ibm.com:30645 --token=CgwpwTu12sJV3u45iFFWd-6V7JsD8b90JBoJk1zGR2I
+    oc login https://c100-e.us-south.containers.cloud.ibm.com:30645 --token=CgwpwTu12sJV3u45iFFWd-6V7JsD8b90JBoJk1zGR2I
     ```
 
     1. In the `environment` section of the `Jenkinsfile`, change the `LOGIN_URL` and the `LOGIN_PORT` to match
@@ -45,21 +45,21 @@ To create a fork of the spring-client repository:
 
     **Note:** it is not proper to leave configuration details in your repository, let alone on public Github, but for simplicity I defined the URL and NodePort here.
 
-2. Commit changes to the `Jenkinsfile` to your Github fork. The Jenkins pipeline will use your `Jenkinsfile` to deploy your forked `spring-client` to your own OpenShift cluster.
+1. Commit changes to the `Jenkinsfile` to your Github fork. The Jenkins pipeline will use your `Jenkinsfile` to deploy your forked `spring-client` to your own OpenShift cluster.
 
 ## Create a Github Personal Access Token
 
-1. Login to your Github account at https://github.com/
-1. Go to https://github.com/settings/tokens
-1. Click `Generate new token`
+1. Login to your Github account at [https://github.com/](https://github.com/),
+1. Go to [https://github.com/settings/tokens](https://github.com/settings/tokens),
+1. Click `Generate new token`,
 1. Under `Note` add `github-access-token-for-jenkins-on-openshift`,
 1. Select the scopes for `repo`, `read:repo_hook`, and `user`,
 1. Click `Generate token`,
 1. Copy the token and save it, you need it to create the Jenkins pipeline from the Github source,
 
-    ![](../images/github-personal-access-token-1.png)
+    ![github personal access token 1](../images/github-personal-access-token-1.png)
 
-    ![](../images/github-personal-access-token-2.png)
+    ![github personal access token 2](../images/github-personal-access-token-2.png)
 
 1. E.g. create an environment variable GITHUB_TOKEN,
 
@@ -93,7 +93,7 @@ To create a fork of the spring-client repository:
     ![OpenShift Jenkins credentials](../images/jenkins-credentials-system-add.png)
 
 1. From the drowdown, click `Add credentials`,
-2. The Jenkinsfile expects an OpenShift API token credential to be available named `openshift-login-api-token`,
+1. The Jenkinsfile expects an OpenShift API token credential to be available named `openshift-login-api-token`,
 1. For Kind select `Username with password`,
 1. For Scope select `Global`,
 1. For Username enter `token`,
@@ -103,14 +103,14 @@ To create a fork of the spring-client repository:
 
     ![Jenkins credentials](../images/jenkins-new-credentials.png)
 
-2. Click OK,
+1. Click OK,
 
     ![Jenkins new credentials](../images/jenkins-new-credential.png)
 
 ## Create a Jenkins Pipeline
 
 1. Make sure a project `springclient-ns` exists in OpenShift,
-1. if no `springclient-ns` project exists, create it from the cloud shell, 
+1. if no `springclient-ns` project exists, create it from the cloud shell,
 
     ```console
     oc new-project springclient-ns
@@ -126,16 +126,15 @@ To create a fork of the spring-client repository:
 
 1. The Jenkinsfile of the spring-client application defines a stage to delete and create the `springclient-ns` project. The delete step causes an error when the project it tries to delete is missing,
 
-
 1. Go back to the Jenkins dashboard. If you closed Jenkins,
 1. Go to the `Application Console`, and go to the project `jenkins`,
 1. Click the Route for External Traffic to open the Jenkins instance,
 1. Click `Log in with OpenShift`,
-1. In the Jenkins Dashboard, click `Open Blue Ocean` to open the Blue Ocean editor. 
+1. In the Jenkins Dashboard, click `Open Blue Ocean` to open the Blue Ocean editor.
 
     ![Jenkins Open Blue Ocean](../images/jenkins-open-blue-ocean.png)
 
-1. If the Welcome to Jenkins popup window shows, click the `Create a new Pipeline` button, 
+1. If the Welcome to Jenkins popup window shows, click the `Create a new Pipeline` button,
 
     ![Jenkins Create new pipeline](../images/jenkins-welcome-create-pipeline.png)
 
@@ -163,7 +162,7 @@ To create a fork of the spring-client repository:
     ![Jenkins Run Pipeline](../images/jenkins-run-pipeline.png)
 
 1. You should see a successful build of the pipeline,
-1. If an error occurs, you can debug the pipeline by unfolding the red cross indicating on the stage, which indicates the pipeline failed in that stage, 
+1. If an error occurs, you can debug the pipeline by unfolding the red cross indicating on the stage, which indicates the pipeline failed in that stage,
 1. Unfold the step in the stage, to see the log output,
 
     ![Jenkins Successful Build](../images/jenkins-error-1.png)
@@ -191,7 +190,7 @@ To create a fork of the spring-client repository:
     Now using project "springclient-ns" on server "https://c100-e.us-south.containers.cloud.ibm.com:30645".
     ```
 
-1. Get the route and test the deployment, 
+1. Get the route and test the deployment,
 
     ```console
     ROUTE="$(oc get route springclient -o json | jq -r '.spec .host')"
