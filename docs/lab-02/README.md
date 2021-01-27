@@ -155,7 +155,6 @@ This lab creates an OpenShift Pipeline to build the `springclient` application i
 
 1. The `View logs` will open the Jenkins instance,
 
-
 ## Resources
 
 See: [OpenShift Build Strategies](https://docs.openshift.com/container-platform/4.5/builds/build-strategies.html#builds-strategy-pipeline-providing-jenkinsfile_build-strategies)

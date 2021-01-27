@@ -2,12 +2,12 @@
 
 ## Requirements
 
-- An IBM Cloud account
-- An OpenShift 4.x cluster with a minimum of 2 worker nodes
-- Access to a terminal with the `oc` cli and `ibmcloud` cli, use [Skills Network](https://labs.cognitiveclass.ai) or [IBM Cloud shell](https://shell.cloud.ibm.com). For instructions go [here](https://ibm.github.io/workshop-setup/COGNITIVECLASS/).
-- A Jenkins instance on OpenShift 4.x, see setup below,
-- A Github fork of https://github.com/remkohdev/spring-client,
-- Github personal access token
+* An IBM Cloud account
+* An OpenShift 4.x cluster with a minimum of 2 worker nodes
+* Access to a terminal with the `oc` cli and `ibmcloud` cli, use [Skills Network](https://labs.cognitiveclass.ai) or [IBM Cloud shell](https://shell.cloud.ibm.com). For instructions go [here](https://ibm.github.io/workshop-setup/COGNITIVECLASS/).
+* A Jenkins instance on OpenShift 4.x, see setup below,
+* A Github fork of [https://github.com/remkohdev/spring-client](https://github.com/remkohdev/spring-client),
+* Github personal access token
 
 ## Setup Jenkins on OpenShift 4.x
 
