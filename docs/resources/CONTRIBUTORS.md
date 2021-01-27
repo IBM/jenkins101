@@ -1,3 +1,3 @@
 # Contributors
 
-* Remko de Knikker [github](https://github.com/remkohdev)
+* Remko de Knikker [(github)](https://github.com/remkohdev)
