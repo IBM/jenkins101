@@ -25,12 +25,13 @@ To create a fork of the spring-client repository:
 
     ![OpenShift Copy Login Command](../images/copy-login-command.png)
 
-    ```
+    ```console
     $ oc login https://c100-e.us-south.containers.cloud.ibm.com:30645 --token=CgwpwTu12sJV3u45iFFWd-6V7JsD8b90JBoJk1zGR2I
     ```
 
     1. In the `environment` section of the `Jenkinsfile`, change the `LOGIN_URL` and the `LOGIN_PORT` to match
-    ```
+
+    ```console
     pipeline {
     agent any
     tools { 
@@ -44,7 +45,7 @@ To create a fork of the spring-client repository:
 
     **Note:** it is not proper to leave configuration details in your repository, let alone on public Github, but for simplicity I defined the URL and NodePort here.
 
-1. Commit changes to the `Jenkinsfile` to your Github fork. The Jenkins pipeline will use your `Jenkinsfile` to deploy your forked `spring-client` to your own OpenShift cluster.
+2. Commit changes to the `Jenkinsfile` to your Github fork. The Jenkins pipeline will use your `Jenkinsfile` to deploy your forked `spring-client` to your own OpenShift cluster.
 
 ## Create a Github Personal Access Token
 
@@ -62,7 +63,7 @@ To create a fork of the spring-client repository:
 
 1. E.g. create an environment variable GITHUB_TOKEN,
 
-    ```
+    ```console
     export GITHUB_TOKEN=<your token>
     ```
 
@@ -71,7 +72,7 @@ To create a fork of the spring-client repository:
 1. Go to the OpenShift web console again or use the `Copy Login Command` from earlier again,
 1. From the logged in user profile dropdown, click the `Copy Login Command`. The command should look like,
 
-    ```
+    ```console
     oc login https://<your-openshift-url>:<your-openshift-port> --token=<your-openshift-api-token>
     ```
 
@@ -111,7 +112,7 @@ To create a fork of the spring-client repository:
 1. Make sure a project `springclient-ns` exists in OpenShift,
 1. if no `springclient-ns` project exists, create it from the cloud shell, 
 
-    ```
+    ```console
     oc new-project springclient-ns
     ```
 
@@ -179,27 +180,27 @@ To create a fork of the spring-client repository:
 1. From the cloud shell, make sure you're logged in to the OpenShift console,
 1. Use the project `oc project springclient-ns`,
 
-    ```
+    ```console
     oc project springclient-ns
     ```
 
     outputs,
 
-    ```
+    ```console
     $ oc project springclient-ns
     Now using project "springclient-ns" on server "https://c100-e.us-south.containers.cloud.ibm.com:30645".
     ```
 
 1. Get the route and test the deployment, 
 
-    ```
+    ```console
     ROUTE="$(oc get route springclient -o json | jq -r '.spec .host')"
     curl -X GET http://$ROUTE/api/hello?name=you
     ```
 
     outputs,
 
-    ```
+    ```console
     ROUTE="$(oc get route springclient -o json | jq -r '.spec .host')"
     curl -X GET http://$ROUTE/api/hello?name=you
     { "message" : "Hello you" }

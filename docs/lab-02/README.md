@@ -13,14 +13,14 @@ This lab creates an OpenShift Pipeline to build the `springclient` application i
 1. Go to the Cloud Shell and make sure you are logged in to your cluster,
 1. Delete the existing project,
 
-    ```
+    ```console
     oc delete project jenkins
     oc delete project springclient-ns
     ```
 
     outputs,
 
-    ```
+    ```console
     $ oc delete project jenkins
     project.project.openshift.io "jenkins" deleted
     $ oc delete project springclient-ns
@@ -73,13 +73,13 @@ This lab creates an OpenShift Pipeline to build the `springclient` application i
 
 6. Create a Jenkins master,
 
-    ```
+    ```console
     oc new-app jenkins-ephemeral
     ```
 
     outputs,
 
-    ```
+    ```console
     $ oc new-app jenkins-ephemeral
     --> Deploying template "openshift/jenkins-ephemeral" to project springclient-ns
 
@@ -140,7 +140,7 @@ This lab creates an OpenShift Pipeline to build the `springclient` application i
 
 14. Start a build of the pipeline,
 
-    ```
+    ```console
     $ oc start-build spring-client-pipeline
     build.build.openshift.io/spring-client-pipeline-1 started
     ```
@@ -158,4 +158,4 @@ This lab creates an OpenShift Pipeline to build the `springclient` application i
 
 ## Resources
 
-See: https://docs.openshift.com/container-platform/4.3/builds/build-strategies.html#builds-strategy-pipeline-build_build-strategies
+See: [OpenShift Build Strategies](https://docs.openshift.com/container-platform/4.5/builds/build-strategies.html#builds-strategy-pipeline-providing-jenkinsfile_build-strategies)
